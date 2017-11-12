@@ -1,0 +1,19 @@
+{
+  "tutorial": 11,
+  "matriculations": ["245536", "234234", "234214"],
+  "exercises": [
+    {
+      "id": 4,
+      "files": [
+        {
+          "name": "Hello.java",
+          "code": "Some java."
+        },
+        {
+          "name": "Huhu.java",
+          "code": "Some more java."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://fbehrens.com/submisson-schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "tutorial": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "matriculations": {
+      "type": "array",
+      "additionalItems": false,
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "string",
+        "minLength": 6,
+        "maxLength": 6,
+        "pattern": "^[0-9]{6}$"
+      }
+    },
+    "exercises": {
+      "type": "array",
+      "additionalItems": false,
+      "uniqueItems": true,
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "files": {
+            "type": "array",
+            "additionalItems": false,
+            "uniqueItems": true,
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50,
+                  "pattern": "^[a-zA-Z0-9 -_]+.[a-zA-Z0-9]+$"
+                },
+                "code": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100000
+                }
+              },
+              "required": [
+                "name",
+                "code"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "files"
+        ]
+      }
+    }
+  },
+  "required": [
+    "tutorial",
+    "matriculations",
+    "exercises"
+  ]
+}

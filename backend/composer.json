@@ -1,0 +1,6 @@
+{
+    "require": {
+        "justinrainbow/json-schema": "^5.2",
+        "phpmailer/phpmailer": "^6.0"
+    }
+}
