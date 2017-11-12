@@ -89,7 +89,7 @@ class App extends Component {
 
     handleFailedSubmission(error) {
         alert("Leider hat die Abgabe nicht funktioniert." +
-            " Bitte schicken Sie ihrem Tutor die Abgabe per Mail. Sie können es auch später wieder versuchen.");
+            " Bitte schicken Sie Ihrem Tutor die Abgabe per Mail. Sie können es auch später wieder versuchen.");
     }
 
     determineModeFromFilename(filename) {
@@ -151,7 +151,7 @@ class App extends Component {
                     <div className="col-md-3">
                         <div className="card">
                             <div className="card-body">
-                                <p className="card-text">Bitte wählen Sie ihr Tutorium!</p>
+                                <p className="card-text">Bitte wählen Sie Ihr Tutorium!</p>
                                 <Select name="choose-tutor"
                                         options={selectOptions}
                                         placeholder="Tutorium auswählen.."
@@ -161,7 +161,7 @@ class App extends Component {
                         </div>
                         <div className="card mt-2">
                             <div className="card-body">
-                                <p className="card-text">Bitte geben Sie ihre eigene Matrikelnummer sowie die ihrer
+                                <p className="card-text">Bitte geben Sie Ihre eigene Matrikelnummer sowie die Ihrer
                                     Abgabepartner an, <strong>jeweils gefolgt von <code>Enter</code></strong>.</p>
                                 <TagsInput
                                     value={this.state.matriculations}
