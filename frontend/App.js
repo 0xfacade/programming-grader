@@ -63,7 +63,7 @@ class App extends Component {
             return;
         }
         const data = {
-            tutorial: parseInt(this.state.tutorial),
+            tutorial: parseInt(this.state.tutorial.value),
             matriculations: this.state.matriculations,
             exercises: this.state.exercises.map((exercise) => {
                 return {
@@ -77,7 +77,19 @@ class App extends Component {
                 };
             })
         };
-        axios.post('some_url');
+        axios.post('submit.php', data)
+            .then((response) => this.handleSuccessfulSubmission(response))
+            .catch((error) => this.handleFailedSubmission(error));
+    }
+
+    handleSuccessfulSubmission() {
+        alert("Abgabe war erfolgreich! Sie können jederzeit wieder abgeben. Ihr Tutor wird dann die letzte Abgabe bewerten.");
+        window.location.reload();
+    }
+
+    handleFailedSubmission(error) {
+        alert("Leider hat die Abgabe nicht funktioniert." +
+            " Bitte schicken Sie ihrem Tutor die Abgabe per Mail. Sie können es auch später wieder versuchen.");
     }
 
     determineModeFromFilename(filename) {
