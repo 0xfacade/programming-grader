@@ -25,7 +25,7 @@ Apache that is configured to execute php scripts.
 
 1. Clone the repository
 1. `cd backend`
-1. Install the dependencies of the backend: `composer install` (this
+1. Install the dependencies of the backend: `php composer.phar install` (this
 requires the `composer` package manager)
 1. `cd ../frontend`
 1. Install the dependencies of the frontend: `npm install` (this
