@@ -129,9 +129,10 @@ class App extends Component {
         return (
             <div className="container-fluid">
                 <header className="mt-4">
-                    <h1>Abgabe Programmierung</h1>
-                    <p className="text-muted">Vorlesung WS 2017/18 an der RWTH Aachen bei Prof. Giesl</p>
+                    <h1>{window.config.ui['title']}</h1>
+                    <p className="text-muted">{window.config.ui['subtitle']}</p>
                     <hr />
+                    <p dangerouslySetInnerHTML={{__html: window.config.ui['info']}}></p>
                 </header>
 
                 {this.state.warnings.length > 0 ?
@@ -161,7 +162,7 @@ class App extends Component {
                         <div className="card mt-2">
                             <div className="card-body">
                                 <p className="card-text">Bitte geben Sie ihre eigene Matrikelnummer sowie die ihrer
-                                    Abgabepartner an, jeweils gefolgt von <code>Enter</code>.</p>
+                                    Abgabepartner an, <strong>jeweils gefolgt von <code>Enter</code></strong>.</p>
                                 <TagsInput
                                     value={this.state.matriculations}
                                     onlyUnique={true}

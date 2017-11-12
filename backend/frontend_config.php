@@ -1,7 +1,7 @@
 <?php
 
 function getFrontendConfigAsJSonString() {
-    $config = require_once('../config.php');
+    $config = require('../config.php');
     $tutorials = [];
     foreach($config['tutorials'] as $tutorial) {
         $tutorials[] = [
@@ -33,6 +33,7 @@ function getFrontendConfigAsJSonString() {
     }
 
     return json_encode([
+        'ui' => $config['ui'],
         'tutorials' => $tutorials,
         'exercises' => $exercises,
     ]);

@@ -1,6 +1,16 @@
 <?php
 
 return [
+    'ui' => [
+        'title' => 'Abgabe Programmierung',
+        'subtitle' => 'Vorlesung WS 2017/18 an der RWTH Aachen bei Prof. Giesl',
+        'info' => '<p>Hier können Sie den Programmierteil ihrer Abgabe hochladen. Bitte beachten Sie, dass
+nicht alle Tutoren an der Online-Abgabe teilnehmen und Sie daher nur hier abgeben können, wenn ihr Tutorium
+in der Liste der Tutoren aufgeführt wird.</p>
+<p>Da es sich um ein neues System handelt, bitten wir Sie, ihre Abgabe <b>unbedingt aufzubewahren</b>, falls es 
+zu technischen Schwierigkeiten kommt und Ihre Abgabe nicht gespeichert werden kann. Bitte melden Sie eventuelle Probleme
+ <a href="mailto:florian.behrens@rocketmail.com">hier</a>.</p>',
+    ],
     // This is used to notify the tutors about new submissions.
     'smtp' => [
         'host' => 'smtp.google.com',
@@ -65,8 +75,12 @@ return [
                 ],
                 [
                     'name' => 'SimpleIO.java',
+                    // When set to true, users will still see the file, but will
+                    // be unable to edit it.
                     'isGiven' => true,
-                ]
+                    'mode' => 'text/x-java',
+                    'code' => '// The contents of SimpleIO.java',
+                ],
             ]
         ]
     ],

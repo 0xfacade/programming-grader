@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" href="favicon.ico?v=2">
-    <title>Abgabesystem</title>
+    <title><?php $config = require('../config.php'); echo $config['ui']['title'] . ' - ' . $config['ui']['subtitle']; ?></title>
+
 </head>
 <body>
 <noscript>
