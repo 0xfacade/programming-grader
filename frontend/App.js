@@ -129,7 +129,9 @@ class App extends Component {
         return (
             <div className="container-fluid">
                 <header className="mt-4">
-                    <h1>Abgabe der Programmieraufgaben</h1>
+                    <h1>Abgabe Programmierung</h1>
+                    <p className="text-muted">Vorlesung WS 2017/18 an der RWTH Aachen bei Prof. Giesl</p>
+                    <hr />
                 </header>
 
                 {this.state.warnings.length > 0 ?
@@ -171,14 +173,14 @@ class App extends Component {
                         </div>
                         <button
                             type="button"
-                            className="btn btn-success btn-lg btn-block mt-2"
+                            className="btn btn-success btn-lg btn-block mt-2 mb-4"
                             onClick={this.handleSubmitClicked.bind(this)}>
                                 Lösung abgeben
                         </button>
                     </div>
                     <div className="col-md-9">
                         {this.state.exercises.map((exercise, exerciseIndex) =>
-                            <div className="card">
+                            <div className="card mb-4">
                                 <div className="card-header">{exercise.name}</div>
                                 <div className="card-body">
                                     <Tabs>
@@ -190,23 +192,22 @@ class App extends Component {
 
                                         {exercise.files.map((file, fileIndex) =>
                                             <TabPanel>
-                                                {file.isGiven ?
-                                                    <p>Diese Datei wird Ihnen gestellt. Sie können Sie nicht
-                                                        hochladen.</p>
-                                                    : <CodeMirror
-                                                        value={file.code}
-                                                        onChange={this.handleCodeChange.bind(this, exerciseIndex, fileIndex)}
-                                                        options={{
-                                                            mode: file.mode,
-                                                            lineNumbers: true
-                                                        }}/>
-                                                }
+                                                {file.isGiven ? <p>Diese Datei wird Ihnen gestellt. Sie können Sie <b>nicht
+                                                    verändern.</b></p> : null}
+                                                <CodeMirror
+                                                    value={file.code}
+                                                    onChange={this.handleCodeChange.bind(this, exerciseIndex, fileIndex)}
+                                                    options={{
+                                                        mode: file.mode,
+                                                        lineNumbers: true,
+                                                        readOnly: file.isGiven
+                                                    }}/>
                                             </TabPanel>
                                         )}
                                     </Tabs>
-                                    <div className="mt-2">
-                                        Weitere Datei abgeben:
-                                        <div className="input-group">
+                                    <div className="mt-4">
+                                        Wenn Sie weitere Dateien abgeben möchten, dann können Sie das hier tun:
+                                        <div className="input-group mt-2">
                                             <input
                                                 type="text"
                                                 className="form-control"
@@ -229,6 +230,13 @@ class App extends Component {
                                 </div>
                             </div>
                             ) /* exercise */}
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-12">
+                        <p className="text-muted text-center">
+                            <a href="https://github.com/0xfacade/programming-grader">programming-grader</a> by Florian M. Behrens, &copy; 2017
+                        </p>
                     </div>
                 </div>
             </div>

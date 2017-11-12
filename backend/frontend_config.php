@@ -23,11 +23,9 @@ function getFrontendConfigAsJSonString() {
             $f = [
                 'name' => $file['name'],
                 'isGiven' => $file['isGiven'],
+                'mode' => $file['mode'],
+                'code' => $file['code'],
             ];
-            if (!$file['isGiven']) {
-                $f['mode'] = $file['mode'];
-                $f['code'] = $file['code'];
-            }
             $files[] = $f;
         }
         $e['files'] = $files;
