@@ -25,8 +25,8 @@ Apache that is configured to execute php scripts.
 
 1. Clone the repository
 1. `cd backend`
-1. Install the dependencies of the backend: `bower install` (this
-requires the `bower` package manager)
+1. Install the dependencies of the backend: `composer install` (this
+requires the `composer` package manager)
 1. `cd ../frontend`
 1. Install the dependencies of the frontend: `npm install` (this
 requires the node package manager `npm`)
