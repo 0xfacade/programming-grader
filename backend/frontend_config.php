@@ -24,7 +24,8 @@ function getFrontendConfigAsJSonString() {
                 'name' => $file['name'],
                 'isGiven' => $file['isGiven'],
                 'mode' => $file['mode'],
-                'code' => $file['code'],
+                'comment' => isset($file['comment']) ? $file['comment'] : null,
+                'code' => isset($file['code']) ? $file['code'] : null,
             ];
             $files[] = $f;
         }

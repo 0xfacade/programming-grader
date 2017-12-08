@@ -24,7 +24,8 @@ module.exports = {
                                 }
                             }],
                             "react"
-                        ]
+                        ],
+                        plugins: ["transform-object-rest-spread"],
                     }
                 },
 

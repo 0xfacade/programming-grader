@@ -16,6 +16,8 @@ import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/haskell/haskell'
 import 'codemirror/mode/clike/clike'
 
+import Dropzone from 'react-dropzone'
+
 import axios from 'axios';
 
 class App extends Component {
@@ -49,6 +51,16 @@ class App extends Component {
         }
         if (this.state.matriculations.length == 0) {
             warnings.push("Sie müssen mindestens eine Matrikelnummer angeben! Stellen Sie sicher, dass Sie jede Matrikelnummer mit Enter bestätigen!");
+        }
+        for(var e = 0; e < this.state.exercises.length; e++) {
+            for(var f = 0; f < this.state.exercises[e].files.length; f++) {
+                const fileObj = this.state.exercises[e].files[f];
+                if (f.mode == 'zip' && f.upload == undefined) {
+                    if(!confirm('Sie haben keine Lösung für ' + f.name + ' ausgewählt. Möchten Sie trotzdem abgeben?')) {
+                        warnings.push('Wählen Sie für ' + f.name + ' eine Datei aus.');
+                    }
+                }
+            }
         }
         if(warnings.length > 0) {
             this.setState({warnings});
@@ -120,6 +132,23 @@ class App extends Component {
         const newFileNames = this.state.newFileNames.concat();
         newFileNames[exerciseIndex] = "";
         this.setState({exercises: updatedExercises, newFileNames});
+    }
+
+    onDropFile(exerciseIndex, fileIndex, files) {
+        const newFileObj = {...this.state.exercises[exerciseIndex].files[fileIndex]};
+        newFileObj['upload'] = files[0];
+        const newFileArray = this.state.exercises[exerciseIndex].files.concat();
+        newFileArray[fileIndex] = newFileObj;
+        const newExObj = {...this.state.exercises[exerciseIndex]};
+        newExObj.files = newFileArray;
+        const newExArray = this.state.exercises.concat();
+        newExArray[exerciseIndex] = newExObj;
+        this.setState({
+            exercises: newExArray,
+        });
+        const reader = new FileReader();
+        reader.onload = (e) => newFileObj['code'] = e.target.result;
+        reader.readAsDataURL(files[0]);
     }
 
     render() {
@@ -195,14 +224,40 @@ class App extends Component {
                                             <TabPanel>
                                                 {file.isGiven ? <p>Diese Datei wird Ihnen gestellt. Sie können Sie <b>nicht
                                                     verändern.</b></p> : null}
-                                                <CodeMirror
-                                                    value={file.code}
-                                                    onChange={this.handleCodeChange.bind(this, exerciseIndex, fileIndex)}
-                                                    options={{
-                                                        mode: file.mode,
-                                                        lineNumbers: true,
-                                                        readOnly: file.isGiven
-                                                    }}/>
+                                                {file.comment != null ? <p dangerouslySetInnerHTML={{__html: file.comment}}></p> : null}
+                                                {file.mode != 'zip' ?
+                                                    <CodeMirror
+                                                        value={file.code}
+                                                        onChange={this.handleCodeChange.bind(this, exerciseIndex, fileIndex)}
+                                                        options={{
+                                                            mode: file.mode,
+                                                            lineNumbers: true,
+                                                            readOnly: file.isGiven
+                                                        }}/>
+                                                    : <Dropzone
+                                                        onDrop={this.onDropFile.bind(this, exerciseIndex, fileIndex)}
+                                                        accept="application/zip"
+                                                        multiple={false}
+                                                        maxSize={1024 * 1024}
+                                                        style={{
+                                                            width: '100%',
+                                                            textAlign: 'center',
+                                                            padding: 15,
+                                                            border: '1px solid rgb(91, 192, 222)',
+                                                            borderRadius: '3px',
+                                                        }}>
+
+                                                        {file.upload != undefined ?
+                                                            <p style={{margin: 0, padding: 0}}>
+                                                                Ausgewählt: {file.upload.name} ({Math.round(file.upload.size / 1024 * 10) / 10}kB)
+                                                            </p>
+                                                            : <p style={{margin: 0, padding: 0}}>
+                                                                Datei hier hinziehen oder klicken, um Auswahldialog zu öffnen.
+                                                            </p>
+                                                        }
+
+                                                    </Dropzone>
+                                                }
                                             </TabPanel>
                                         )}
                                     </Tabs>

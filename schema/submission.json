@@ -54,7 +54,7 @@
                 "code": {
                   "type": "string",
                   "minLength": 1,
-                  "maxLength": 100000
+                  "maxLength": 1500000
                 }
               },
               "required": [

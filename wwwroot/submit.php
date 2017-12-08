@@ -18,6 +18,16 @@ function countSubmissions($uploadDir) {
     return count($results);
 }
 
+function isDataUri($string) {
+    return strpos($string, 'data:') == 0;
+}
+
+function decodeDataUri($string) {
+    $start = strpos($string, ',');
+    $b64_string = substr($string, $start);
+    return base64_decode($b64_string);
+}
+
 if($_SERVER['REQUEST_METHOD'] !== 'POST') {
     respond('Only post requests are supported.');
 }
@@ -94,7 +104,11 @@ foreach($data->exercises as $exercise) {
     }
     foreach($exercise->files as $file) {
         $full_name = $ex_dir . $file->name;
-        if(!file_put_contents($full_name, $file->code)) {
+        $file_contents = $file->code;
+        if (isDataUri($file_contents)) {
+            $file_contents = decodeDataUri($file_contents);
+        }
+        if(!file_put_contents($full_name, $file_contents)) {
             respond('Could not write to file.');
         }
         $zip->addFile($full_name,'ex' . $exercise->id . '/' . $file->name);
