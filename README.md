@@ -2,8 +2,7 @@
 A project to collect solutions to programming exercises from
 students through a common web interface.
 
-In the future, docker based automatic grading may be added to
-the project.
+![Screenshot of the collection system](screenshot.png "Screenshot of the collection system")
 
 ## Usage
 
